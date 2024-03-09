@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Book</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #FF3EA5;
+        }
+
+        .container {
+            font-family: sans-serif;
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 10px;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .contact {
+            border-radius: 20px;
+            background: radial-gradient(circle, rgba(245, 76, 150, 1) 0%, rgba(16, 115, 232, 1) 100%);
+            padding: 30px;
+        }
+
+        .inputForm, .details {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: bold;
+            background-color: white;
+            color: #FF3EA5;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        #contactDetails {
+            color: white;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Contact Book</h1>
+        <div class="contact">
+            <div class="inputForm">
+                <h2>Add New Contact</h2>
+                <form id="addContactForm">
+                    <input type="text" id="contactName" placeholder="Enter contact name" required>
+                    <input type="tel" id="contactNumber" placeholder="Enter contact number" required>
+                    <button type="button" onclick="addContact()">Submit</button>
+                </form>
+            </div>
+            <div class="details">
+                <h2>Get Contact Details</h2>
+                <form id="getContactForm">
+                    <input type="text" id="searchContact" placeholder="Contact name" required>
+                    <button type="button" onclick="getContactDetails()">Get Details</button>
+                </form>
+                <div id="contactDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let contacts = [];
+
+        function addContact() {
+            const name = document.getElementById('contactName').value;
+            const number = document.getElementById('contactNumber').value;
+
+            if (name && number) {
+                contacts.push({ name, number });
+                alert('Contact added successfully!');
+                document.getElementById('addContactForm').reset();
+            } else {
+                alert('Please enter both contact name and number.');
+            }
+        }
+
+        function getContactDetails() {
+            const searchName = document.getElementById('searchContact').value;
+            const contact = contacts.find(savedName => savedName.name === searchName);
+
+            if (contact) {
+                document.getElementById('contactDetails').innerHTML = `<p>Contact Name: ${contact.name}<br>Contact Number: ${contact.number}</p>`;
+            } else {
+                document.getElementById('contactDetails').innerHTML = 'Contact not found.';
+            }
+        }
+    </script>
+</body>
+
+</html>
